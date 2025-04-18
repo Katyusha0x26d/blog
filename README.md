@@ -1,51 +1,11 @@
-# create-valaxy
+# blog
 
-Example: [valaxy.site](https://valaxy.site)
+此博客基于以下项目或服务构建而成：
 
-## Usage
+- [Valaxy，静态博客框架](https://valaxy.site/)
 
-```bash
-# install
-npm i
-# or pnpm i
+- [Vercel，Web项目构建服务](https://vercel.com/)
 
-# start
-npm run dev
-# or pnpm dev
-```
+- [又拍云，静态资源存储及CDN加速](https://upyun.com/)
 
-See `http://localhost:4859/`, have fun!
-
-### Config
-
-Modify `valaxy.config.ts` to custom your blog.
-
-English & Chinese Docs is coming!
-
-> Wait a minute.
-
-### Docker
-
-```bash
-docker build . -t your-valaxy-blog-name:latest
-```
-
-## Structure
-
-In most cases, you only need to work in the `pages` folder.
-
-### Main folders
-
-- `pages`: your all pages
-  - `posts`: write your posts here, will be counted as posts
-- `styles`: override theme styles, `index.scss`/`vars.csss`/`index.css` will be loaded automatically
-- `components`: custom your vue components (will be loaded automatically)
-- `layouts`: custom layouts (use it by `layout: xxx` in md)
-- `locales`: custom i18n
-
-### Other
-
-- `.vscode`: recommend some useful plugins & settings, you can preview icon/i18n/class...
-- `.github`: GitHub Actions to auto build & deploy to GitHub Pages
-- `netlify.toml`: for [netlify](https://www.netlify.com/)
-- `vercel.json`: for [vercel](https://vercel.com/)
+没有这些项目，此博客将仅仅停留在源码层面
