@@ -1,11 +1,17 @@
 # blog
 
-此博客基于以下项目或服务构建而成：
+我的个人静态博客仓库，详见：[https://katyusha.me/](https://katyusha.me/)
+
+## 致谢
+
+此博客致谢以下项目及服务：
 
 - [Valaxy，静态博客框架](https://valaxy.site/)
 
-- [Vercel，Web项目构建服务](https://vercel.com/)
+- [Vercel，Web项目构建及CDN加速](https://vercel.com/)
 
-- [又拍云，静态资源存储及CDN加速](https://upyun.com/)
+- [Cloudflare，静态资源存储及CDN加速](https://www.cloudflare.com/)
 
-没有这些项目，此博客将仅仅停留在源码层面
+- [GitHub，代码托管](https://github.com/)
+
+没有这些项目及服务的大力支持，此博客将仅仅停留在Markdown源码阶段。

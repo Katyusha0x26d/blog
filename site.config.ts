@@ -6,7 +6,7 @@ export default defineSiteConfig({
   title: 'Katyusha Mindpalace',
   author: {
     name: 'Katyusha0x26d',
-    avatar: '/avatar.webp',
+    avatar: 'https://static.katyusha.me/blog-static/2025/12/f30e9702da611defbedf38282ea798dc.webp',
     status: {
       emoji: '🧑‍💻',
       message: 'busy...'
@@ -56,6 +56,8 @@ export default defineSiteConfig({
   },
 
   sponsor: {
-    enable: false
+    enable: true,
+    title: '让价值流向更远方',
+    description: '这里的知识免费，但自由与生命无价。若你心存感激，请代我将这份力量传递给 维基媒体、自由软件基金会 或 联合国儿童基金会 等众多非营利组织。让知识、技术与爱，都开源给这个世界。',
   }
 })
