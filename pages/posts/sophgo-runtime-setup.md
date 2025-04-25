@@ -245,7 +245,7 @@ Estimated Total Size (MB): 586.03
 ==========================================================================================
 ```
 
-::: error
+::: danger
 
 如果仅仅将上述获得的模型导出为onnx格式，那么由于模型`forward`函数具有额外的除了张量以外的参数，会导致后续处理onnx模型时存在问题，因此我们需要对原有模型进行包装
 
@@ -356,11 +356,9 @@ touch main.cpp
 touch .clangd
 ```
 
-编辑下列文件：
+编辑vscode的工作区插件配置文件`.vscode/settings.json`：
 
-::: code-group
-
-```json [.vscode/settings.json]
+```json
 {
     "clangd.arguments": [
         "--log=verbose",
@@ -379,14 +377,18 @@ touch .clangd
 }
 ```
 
-```yaml [.clangd]
+编辑clangd配置文件`.clangd`以移除march和mcpu选项，防止因为clangd内置的引擎不支持这些选项造成错误误报
+
+```yaml
 CompileFlags:
     Remove: 
         - "-march=*"
         - "-mcpu=*"
 ```
 
-```cmake [CMakeLists.txt]
+编辑项目配置`CMakeLists.txt`
+
+```cmake
 cmake_minimum_required(VERSION 3.25)
 project(guidance CXX)
 
@@ -450,7 +452,9 @@ target_link_libraries(guidance
 )
 ```
 
-```c++ [main.cpp]
+编辑C++程序`main.cpp`
+
+```c++
 #include <iostream>
 #include <fstream>
 #include <cviruntime.h>
