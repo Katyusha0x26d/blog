@@ -212,6 +212,14 @@ git clone https://github.com/milkv-duo/tpu-mlir.git
 
 ### 获取onnx模型
 
+::: warning
+
+这篇博客的[前一个版本（2025.4.25 23:38，Commit:7f984a3）](https://github.com/Katyusha0x26d/blog/commit/7f984a3521e7b4759b62b87ef59bb485bc2c9ec2)里我直接使用`DinoV2`进行`ImageNet`预测，这实际上是不对的，因为`DinoV2`只是一个特征提取器，不是一个分类器，如果读者想要对图像进行分类，应该在`DinoV2`骨干网络后增加一个分类头，而不是直接使用骨干网络进行分类
+
+在读者目前看到的文章版本里，这个错误已经被修复
+
+:::
+
 通过torch加载位于TorchHub的预训练模型，查看模型的详细信息并导出为onnx格式
 
 ```python
@@ -255,6 +263,7 @@ Estimated Total Size (MB): 586.03
 ```python
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 class WrappedModel(nn.Module):
     def __init__(self, model):
@@ -262,7 +271,7 @@ class WrappedModel(nn.Module):
         self.model = model
 
     def forward(self, x):
-        return self.model(x)
+        return F.softmax(self.model(x), dim=1)
 
 test_inputs = torch.randn(1, 3, 448, 448)
 model = WrappedModel(dinov2_vits14)
@@ -317,10 +326,9 @@ model_transform.py \
 --model_def dinov2_vits14.onnx \
 --input_shapes [[1,3,448,448]] \
 --pixel_format "rgb" \
---keep_aspect_ratio \
 --mean 123.675,116.28,103.53 \
 --scale 0.0171,0.0175,0.0174 \
---mlir dinov2_vits14.mlir \
+--mlir dinov2_vits14.mlir
 ```
 使用`run_calibration.py`生成校准表
 
@@ -455,23 +463,21 @@ target_link_libraries(guidance
 编辑C++程序`main.cpp`
 
 ```c++
-#include <iostream>
-#include <fstream>
 #include <cviruntime.h>
 #include <opencv2/opencv.hpp>
-#include <numeric>
 
 #define IMG_RESIZE_DIMS 448,448
-#define BGR_MEAN        123.675,116.28,103.53
+#define RGB_MEAN        123.675,116.28,103.53
 #define INPUT_SCALE     0.0171,0.0175,0.0174
 
 void usage() {
-    printf("Usage: dinov2 <model> <image> <labels_file>\n");
+    printf("Usage: dinov2 <model> <image>\n");
 }
 
 int main(int argc, char **argv) {
     if (argc < 3) {
         usage();
+        return 1;
     }
     const char *model_path = argv[1];
     const char *image_path = argv[2];
@@ -494,12 +500,14 @@ int main(int argc, char **argv) {
     int32_t height = shape.dim[2];
     int32_t width = shape.dim[3];
     // Load input image
-    cv::Mat image = cv::imread(image_path);
-    if (!image.data) {
+    cv::Mat bgr_image = cv::imread(image_path);
+    if (!bgr_image.data) {
         printf("Could not open image\n");
         return 1;
     }
-    cv::resize(image, image, cv::Size(IMG_RESIZE_DIMS));
+    cv::resize(bgr_image, bgr_image, cv::Size(IMG_RESIZE_DIMS));
+    cv::Mat image;
+    cv::cvtColor(bgr_image, image, cv::COLOR_BGR2RGB);
     cv::Size size = cv::Size(height, width);
     cv::Mat channels[3];
     for (int i = 0; i < 3; i++) {
@@ -507,7 +515,7 @@ int main(int argc, char **argv) {
         channels[i]  = cv::Mat(height, width, CV_8SC1);
     }
     cv::split(image, channels);
-    float mean[]  = {BGR_MEAN};
+    float mean[]  = {RGB_MEAN};
     float input_scale[] = {INPUT_SCALE};
     for (int i = 0; i < 3; i++) {
         channels[i].convertTo(channels[i], CV_8SC1, input_scale[i] * qscale, -1 * mean[i] * input_scale[i] * qscale);
@@ -521,36 +529,16 @@ int main(int argc, char **argv) {
     // run inference
     CVI_NN_Forward(model,  input_tensors, input_num, output_tensors, output_num);
     printf("CVI_NN_Forward succeeded.\n");
-    // output result
-    std::vector<std::string> labels;
-    std::ifstream labels_file(labels_path);
-    if (!labels_file) {
-        printf("Unable to load labels file.\n");
-        return 1;
+    // Output results
+    float *features = (float *)CVI_NN_TensorPtr(output);
+    int count = CVI_NN_TensorCount(output);
+    printf("----------------\n");
+    printf("Image feature: ");
+    for (int i = 0; i < count; i++) {
+        printf("%.3f ", features[i]);
     }
-    std::string line;
-    while (std::getline(labels_file, line)) {
-        labels.push_back(std::string(line));
-    }
-    int32_t top_num = 5;
-    float *probabilities = (float *)CVI_NN_TensorPtr(output);
-    int32_t count = CVI_NN_TensorCount(output);
-    std::vector<size_t> idx(count);
-    std::iota(idx.begin(), idx.end(), 0);
-    std::sort(idx.begin(), idx.end(), [&probabilities](size_t idx_0, size_t idx_1){
-        return probabilities[idx_0] > probabilities[idx_1];
-    });
-    printf("----------\n");
-    printf("Label\tProbability\n");
-    for (size_t i = 0; i < top_num; i++) {
-        int top_k_idx = idx[i];
-        if (!labels.empty()) {
-            printf("%s\t%.5f\n", labels[top_k_idx].c_str(), probabilities[top_k_idx]);
-        } else {
-            printf("%d\t%.5f\n", top_k_idx, probabilities[top_k_idx]);
-        }
-    }
-    printf("----------\n");
+    printf("\n");
+    printf("----------------\n");
     // cleanup
     CVI_NN_CleanupModel(model);
     printf("CVI_NN_CleanupModel succeeded\n");
@@ -558,7 +546,6 @@ int main(int argc, char **argv) {
 }
 ```
 
-:::
 
 随后执行cmake配置，可以使用vscode自动配置也可以进入build目录手动配置
 
@@ -569,9 +556,21 @@ int main(int argc, char **argv) {
 生成了`guidance`这个可执行文件，我们使用SCP将其以及cvimodel模型、测试图片传输到设备上
 
 ```shell
-scp -O .\dinov2_vits14.cvimodel root@192.168.42.1:/root/dinov2_vits14.cvimodel
+scp -O guidance imagenet/ILSVRC2012_val_00000178.JPEG dinov2_vits14.cvimodel root@192.168.42.1:/root
 ```
 
 ### 设备上的测试结果
 
-![测试结果](https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/HcCWi93QM28eJniJlO4DzHzEzmCrUpQP/Snipaste_2025-04-25_23-30-04.png "测试结果")
+使用SSH登录设备，给编译后的二进制文件授予可执行权限：
+
+```shell
+chmod +x guidance
+```
+
+执行程序获得结果，注意此处结果只是一个384长度的向量，因为我们使用的模型是一个特征提取器而不是分类器，分类器经过 $softmax$ 后才会得到`num_classes` 个类的具体概率
+
+```shell
+./guidance dinov2_vits14.cvimodel ILSVRC2012_val_00000094.JPEG
+```
+
+![测试结果](https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/BpElNK5oqv45ckdDpKtV3jNbBOXi5fAu/Snipaste_2025-04-26_18-33-46.png "测试结果")
