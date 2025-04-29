@@ -10,7 +10,7 @@ importers:
     dependencies:
       valaxy:
         specifier: 0.23.0
-        version: 0.23.0(@babel/parser@7.27.0)(@nuxt/kit@3.16.2)(@types/markdown-it@14.1.2)(@types/node@22.14.1)(@vue/compiler-dom@3.5.13)(axios@1.8.4)(eslint@9.25.0(jiti@2.4.2))(postcss@8.5.3)(rollup@4.40.0)(terser@5.39.0)(typescript@5.8.3)(yaml@2.7.1)
+        version: 0.23.0(@babel/parser@7.27.0)(@nuxt/kit@3.16.2)(@types/markdown-it@14.1.2)(@types/node@22.14.1)(@vue/compiler-dom@3.5.13)(async-validator@4.2.5)(axios@1.8.4)(eslint@9.25.0(jiti@2.4.2))(postcss@8.5.3)(rollup@4.40.0)(terser@5.39.0)(typescript@5.8.3)(yaml@2.7.1)
       valaxy-theme-yun:
         specifier: 0.23.0
         version: 0.23.0(vue@3.5.13(typescript@5.8.3))
@@ -1313,6 +1313,9 @@ packages:
   astral-regex@2.0.0:
     resolution: {integrity: sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ==}
     engines: {node: '>=8'}
+
+  async-validator@4.2.5:
+    resolution: {integrity: sha512-7HhHjtERjqlNbZtqNqy2rckN/SpOOlmDliet+lP7k+eKZEjPk3DgyeU9lIXLdeLz0uBbbVp+9Qdow9wJWgwwfg==}
 
   async@3.2.6:
     resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
@@ -4939,12 +4942,13 @@ snapshots:
       '@vueuse/shared': 13.1.0(vue@3.5.13(typescript@5.8.3))
       vue: 3.5.13(typescript@5.8.3)
 
-  '@vueuse/integrations@13.1.0(axios@1.8.4)(fuse.js@7.1.0)(nprogress@0.2.0)(qrcode@1.5.4)(vue@3.5.13(typescript@5.8.3))':
+  '@vueuse/integrations@13.1.0(async-validator@4.2.5)(axios@1.8.4)(fuse.js@7.1.0)(nprogress@0.2.0)(qrcode@1.5.4)(vue@3.5.13(typescript@5.8.3))':
     dependencies:
       '@vueuse/core': 13.1.0(vue@3.5.13(typescript@5.8.3))
       '@vueuse/shared': 13.1.0(vue@3.5.13(typescript@5.8.3))
       vue: 3.5.13(typescript@5.8.3)
     optionalDependencies:
+      async-validator: 4.2.5
       axios: 1.8.4(debug@4.4.0)
       fuse.js: 7.1.0
       nprogress: 0.2.0
@@ -5026,6 +5030,9 @@ snapshots:
       ast-kit: 1.4.2
 
   astral-regex@2.0.0: {}
+
+  async-validator@4.2.5:
+    optional: true
 
   async@3.2.6: {}
 
@@ -7260,7 +7267,7 @@ snapshots:
       - magicast
       - vue
 
-  valaxy@0.23.0(@babel/parser@7.27.0)(@nuxt/kit@3.16.2)(@types/markdown-it@14.1.2)(@types/node@22.14.1)(@vue/compiler-dom@3.5.13)(axios@1.8.4)(eslint@9.25.0(jiti@2.4.2))(postcss@8.5.3)(rollup@4.40.0)(terser@5.39.0)(typescript@5.8.3)(yaml@2.7.1):
+  valaxy@0.23.0(@babel/parser@7.27.0)(@nuxt/kit@3.16.2)(@types/markdown-it@14.1.2)(@types/node@22.14.1)(@vue/compiler-dom@3.5.13)(async-validator@4.2.5)(axios@1.8.4)(eslint@9.25.0(jiti@2.4.2))(postcss@8.5.3)(rollup@4.40.0)(terser@5.39.0)(typescript@5.8.3)(yaml@2.7.1):
     dependencies:
       '@antfu/install-pkg': 1.0.0
       '@antfu/utils': 9.2.0
@@ -7277,7 +7284,7 @@ snapshots:
       '@vitejs/plugin-vue': 5.2.3(vite@6.3.2(@types/node@22.14.1)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.3))
       '@vue/devtools-api': 7.7.2
       '@vueuse/core': 13.1.0(vue@3.5.13(typescript@5.8.3))
-      '@vueuse/integrations': 13.1.0(axios@1.8.4)(fuse.js@7.1.0)(nprogress@0.2.0)(qrcode@1.5.4)(vue@3.5.13(typescript@5.8.3))
+      '@vueuse/integrations': 13.1.0(async-validator@4.2.5)(axios@1.8.4)(fuse.js@7.1.0)(nprogress@0.2.0)(qrcode@1.5.4)(vue@3.5.13(typescript@5.8.3))
       beasties: 0.3.2
       birpc: 2.3.0
       consola: 3.4.2

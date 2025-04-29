@@ -123,6 +123,15 @@ wsl -d Ubuntu --cd ~
 sudo apt install gcc g++ git cmake ninja-build python3 python3-pip clangd
 ```
 
+### 创建工具链目录
+
+可以在用户主目录下创建一个`sophgo`目录用来存放`TPU SDK`、`opencv-mobile`以及`riscv host-tools`
+
+```shell
+cd ~
+mkdir sophgo
+```
+
 ### 安装交叉编译工具链
 
 算能cv181x具有两个架构的处理器：ARM和Risc-V
@@ -130,7 +139,7 @@ sudo apt install gcc g++ git cmake ninja-build python3 python3-pip clangd
 `git clone` 算能Risc-V工具链的编译后二进制仓库：
 
 ```shell
-git clone https://github.com/sophgo/host-tools.git sophgo-toolchain
+git clone https://github.com/sophgo/host-tools.git
 ```
 
 ::: warning
@@ -141,26 +150,36 @@ git clone https://github.com/sophgo/host-tools.git sophgo-toolchain
 
 [2.Functional differences from glibc](https://wiki.musl-libc.org/functional-differences-from-glibc.html)
 
-:::
+### 配置环境变量
 
-获取工具链后此时我们并不能直接通过`riscv64-unknown-linux-musl-gcc`调用编译器，而是应该指定编译器程序的路径或者配置环境变量（实际上不建议配置环境变量给这种小公司小项目，以免扰乱系统原本的环境变量设置）
-
-::: info
-
-对于算能这样的***国产、小公司、小项目***的正确态度应该是每一次使用他们的产品都将是人生自此之后最后一次使用，毕竟这种公司能不能活到我三十五岁退休都不一定
-
-:::
-
-切换到编译器路径，运行编译器查看输出是否正确
+我推荐使用一些Linux发行版例如`openSUSE`的做法，对于用户安装的应用，可以将其可执行文件链接到`~/bin`目录下
 
 ```shell
-cd sophgo-toolchain/gcc/riscv64-linux-musl-x86_64/bin/
-./riscv64-unknown-linux-musl-gcc -v
+mkdir ~/bin
+ln -s ~/sophgo/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-* ~/bin
 ```
 
-没有问题的情况下会有如下图所示的输出结果
+通过以下命令可以检验软软链接是否被正确设置
 
-![交叉编译器正常输出](https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/2kBvX0EM0jRMt0OPxux9A3X3BjkjDFyh/Snipaste_2025-04-25_19-48-21.png "交叉编译器的正常输出")
+```shell
+ls -l ~/bin/riscv64-unknown-linux-musl-*
+```
+
+如果正确地设置了软链接，那么会有下图所示的输出：
+
+![使用ls -l检查软链接](https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/JuMjd1XwcHbmOKa9xPUnM6NTfRnEMI31/Snipaste_2025-04-29_10-48-05.png "使用ls -l检查软链接")
+
+设置软链接后，执行任意`~/bin/`下的可执行文件就会实际上执行链接的目标文件
+
+随后将`~/bin`目录添加进`PATH`环境变量即可，编辑`~/.bashrc`文件，在结尾处添加：
+
+```shell
+export PATH=~/bin/:$PATH
+```
+
+关闭终端并重新打开，此时已经应用了新的环境变量，不出意外，此时执行`riscv64-unknown-linux-musl-gcc -v`会有输出：
+
+![riscv64-unknown-linux-musl-gcc的执行输出](https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/SVb1WUJFrdGHmoednWvgQkjuBlfvarcm/Snipaste_2025-04-29_10-54-17.png "riscv64-unknown-linux-musl-gcc的执行输出")
 
 ## 搭建cviruntime环境
 
@@ -168,7 +187,7 @@ cd sophgo-toolchain/gcc/riscv64-linux-musl-x86_64/bin/
 
 ### 克隆TPU-SDK仓库
 
-切换到工作目录`git clone` SDK仓库
+切换到工具链目录`git clone` SDK仓库
 
 ```shell
 git clone https://github.com/milkv-duo/tpu-sdk-sg200x.git tpu-sdk
@@ -206,6 +225,26 @@ docker exec -it tpuc_dev /bin/bash
 git clone https://github.com/milkv-duo/tpu-mlir.git
 ```
 
+### 搭建opencv-mobile开发环境
+
+Milkv-duo为开发板适配了`opencv-mobile`，其与`opencv`相比更精简，且适配了一些外设，例如在使用`CAM-GC2083`时，如果使用`opencv-mobile`直接调用摄像头，那么此时就会更方便
+
+安装方法很简单，在工具链目录下载并解压缩最新的发行版即可：
+
+```shell
+cd sophgo
+wget https://github.com/nihui/opencv-mobile/releases/latest/download/opencv-mobile-4.11.0-milkv-duo.zip
+unzip opencv-mobile-4.11.0-milkv-duo.zip
+mv opencv-mobile-4.11.0-milkv-duo/ opencv-mobile
+rm opencv-mobile-4.11.0-milkv-duo.zip
+```
+
+::: tip
+
+如果提示找不到命令unzip，使用包管理器安装
+
+:::
+
 ## 测试环境
 
 我们将在设备上部署[Facebook Research](https://ai.meta.com/research/)的[`DinoV2特征提取器`](https://arxiv.org/pdf/2304.07193)测试环境搭建是否正确
@@ -230,8 +269,7 @@ dinov2_vits14 = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14', pretr
 torchinfo.summary(dinov2_vits14, (1, 3, 448, 448))
 ```
 
-
-```
+```output
 ==========================================================================================
 Layer (type:depth-idx)                   Output Shape              Param #
 ==========================================================================================
@@ -258,7 +296,6 @@ Estimated Total Size (MB): 586.03
 如果仅仅将上述获得的模型导出为onnx格式，那么由于模型`forward`函数具有额外的除了张量以外的参数，会导致后续处理onnx模型时存在问题，因此我们需要对原有模型进行包装
 
 :::
-
 
 ```python
 import torch
@@ -330,6 +367,7 @@ model_transform.py \
 --scale 0.0171,0.0175,0.0174 \
 --mlir dinov2_vits14.mlir
 ```
+
 使用`run_calibration.py`生成校准表
 
 ```shell
@@ -389,7 +427,7 @@ touch .clangd
 
 ```yaml
 CompileFlags:
-    Remove: 
+    Remove:
         - "-march=*"
         - "-mcpu=*"
 ```
@@ -398,65 +436,41 @@ CompileFlags:
 
 ```cmake
 cmake_minimum_required(VERSION 3.25)
+
+set(SOPHGO_TOOLCHAIN_PATH /home/maxwell/sophgo)
+set(TPU_SDK_PATH ${SOPHGO_TOOLCHAIN_PATH}/tpu-sdk)
+set(TOOLCHAIN riscv64-linux-musl-x86_64)
+set(CMAKE_TOOLCHAIN_FILE ${TPU_SDK_PATH}/cmake/toolchain-${TOOLCHAIN}.cmake)
+
 project(guidance CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_STANDARD 11)
 
-set(TPU_SDK_PATH /home/maxwell/tpu-sdk)
-set(HOST_TOOLS_PATH /home/maxwell/sophgo-toolchain)
+set(HOST_TOOLS_PATH ${SOPHGO_TOOLCHAIN_PATH}/host-tools)
+set(CMAKE_SYSROOT ${HOST_TOOLS_PATH}/gcc/${TOOLCHAIN}/sysroot)
 
-include(CMakeForceCompiler)
+set(OPENCV_MOBILE_PATH ${SOPHGO_TOOLCHAIN_PATH}/opencv-mobile)
+set(OpenCV_DIR ${OPENCV_MOBILE_PATH}/lib/cmake/opencv4)
+find_package(OpenCV REQUIRED)
 
-set(CMAKE_SYSTEM_NAME          Linux)
-set(CMAKE_SYSTEM_PROCESSOR     riscv)
-set(ARCH riscv)
-set(CROSS_COMPILE ${HOST_TOOLS_PATH}/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-)
+set(FLATBUFFERS_PATH ${TPU_SDK_PATH}/flatbuffers)
+set(Flatbuffers_DIR ${FLATBUFFERS_PATH}/lib/cmake/flatbuffers)
+find_package(Flatbuffers REQUIRED)
 
-set(CMAKE_C_COMPILER ${CROSS_COMPILE}gcc)
-set(CMAKE_CXX_COMPILER ${CROSS_COMPILE}g++)
+include_directories(${TPU_SDK_PATH}/include)
 
-message(STATUS "CMAKE_C_COMPILER: ${CMAKE_C_COMPILER}")
-message(STATUS "CMAKE_CXX_COMPILER: ${CMAKE_CXX_COMPILER}")
-
-set(CMAKE_OBJCOPY ${CROSS_COMPILE}objcopy
-	    CACHE FILEPATH "The toolchain objcopy command " FORCE )
-
-set(CMAKE_SYSROOT ${HOST_TOOLS_PATH}/gcc/riscv64-linux-musl-x86_64/sysroot)
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}" CACHE STRING "")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE STRING "")
-set(CMAKE_ASM_FLAGS "${CMAKE_C_FLAGS}" CACHE STRING "")
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mcpu=c906fdv")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mcpu=c906fdv")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=rv64gcv0p7_zfh_xthead -mabi=lp64d")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=rv64gcv0p7_zfh_xthead -mabi=lp64d")
-
-set(CMAKE_BUILD_TYPE RELEASE)
-set(CMAKE_CXX_FLAGS_RELEASE -O3)
-set(CMAKE_C_FLAGS_RELEASE -O3)
-
-include_directories(
-    ${TPU_SDK_PATH}/include
-    ${TPU_SDK_PATH}/flatbuffers/include
-    ${TPU_SDK_PATH}/opencv/include
+add_executable(guidance
+    main.cpp
 )
 
-add_executable(guidance main.cpp)
-
-link_libraries(
-    ${TPU_SDK_PATH}/lib
-    ${TPU_SDK_PATH}/flatbuffers/lib
-    ${TPU_SDK_PATH}/opencv/lib
-)
+link_libraries(${TPU_SDK_PATH}/lib)
+file(GLOB CVI_LIBS ${TPU_SDK_PATH}/lib/libcvi*.so)
 
 target_link_libraries(guidance
-    ${TPU_SDK_PATH}/lib/libcviruntime.so
-    ${TPU_SDK_PATH}/opencv/lib/libopencv_core.so
-    ${TPU_SDK_PATH}/opencv/lib/libopencv_imgproc.so
-    ${TPU_SDK_PATH}/opencv/lib/libopencv_imgcodecs.so
+    ${OpenCV_LIBS}
+    ${CVI_LIBS}
 )
 ```
 
@@ -546,7 +560,6 @@ int main(int argc, char **argv) {
 }
 ```
 
-
 随后执行cmake配置，可以使用vscode自动配置也可以进入build目录手动配置
 
 随后打开`main.cpp`可以看到clangd已经没有报错了，按住CTRL左键点击任何函数也能跳转到定义
@@ -559,7 +572,7 @@ int main(int argc, char **argv) {
 scp -O guidance imagenet/ILSVRC2012_val_00000178.JPEG dinov2_vits14.cvimodel root@192.168.42.1:/root
 ```
 
-### 设备上的测试结果
+### cviruntime的测试结果
 
 使用SSH登录设备，给编译后的二进制文件授予可执行权限：
 
