@@ -5,6 +5,8 @@ tags:
     - 模型部署
     - 嵌入式
     - 深度学习
+date: 2025-04-25 23:38:15 +0800
+updated: 2025-04-30 20:00:00 +0800
 ---
 
 [算能（Sophgo）](https://www.sophgo.com/about-us/index.html)是国内开发边缘计算处理器比较著名的公司

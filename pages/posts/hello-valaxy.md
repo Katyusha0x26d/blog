@@ -4,6 +4,8 @@ categories: 博客
 tags:
   - valaxy
   - 博客
+date: 2025-04-22 16:06:15 +0800
+updated: 2025-04-22 16:06:15 +0800
 ---
 
 ## 二级标题
@@ -29,14 +31,14 @@ tags:
 > #### 引用内标题
 >
 > 无序列表
-> 
+>
 > - First item
 > - Second item
 > - Third item
 >     - Indented item
 >     - Indented item
 > - Fourth item
-> 
+>
 > 有序列表
 > 1. First item
 > 2. Second item
@@ -50,12 +52,12 @@ tags:
 > 引用代码块
 > ```c++{6}
 > #include <bits/stdc++.h>
-> 
+>
 > using namespace std;
-> 
+>
 > int main(int argc, char **argv) {
 >   cout << "Hello, valaxy!" << endl;
->   return 0; 
+>   return 0;
 > }
 > ```
 
@@ -84,7 +86,7 @@ using namespace std;
 
 int main(int argc, char **argv) {
   cout << "Hello, valaxy!" << endl;
-  return 0; 
+  return 0;
 }
 ```
 
@@ -96,7 +98,7 @@ using namespace std;
 
 int main(int argc, char **argv) {
   cout << "Hello, valaxy!" << endl;
-  return 0; 
+  return 0;
 }
 ```
 
