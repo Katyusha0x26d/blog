@@ -150,6 +150,8 @@ git clone https://github.com/sophgo/host-tools.git
 
 [2.Functional differences from glibc](https://wiki.musl-libc.org/functional-differences-from-glibc.html)
 
+:::
+
 ### 配置环境变量
 
 我推荐使用一些Linux发行版例如`openSUSE`的做法，对于用户安装的应用，可以将其可执行文件链接到`~/bin`目录下
