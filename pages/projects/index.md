@@ -15,5 +15,5 @@ projects:
         emoji: 📖
         desc: 我的博客
         url: https://katyusha.me
-        github: https://github.com/Katyusha0x26d/blog
+        github: Katyusha0x26d/blog
 ---
