@@ -257,7 +257,7 @@ rm opencv-mobile-4.11.0-milkv-duo.zip
 
 ::: warning
 
-这篇博客的[前一个版本（2025.4.25 23:38，Commit:7f984a3）](https://github.com/Katyusha0x26d/blog/commit/7f984a3521e7b4759b62b87ef59bb485bc2c9ec2)里我直接使用`DinoV2`进行`ImageNet`预测，这实际上是不对的，因为`DinoV2`只是一个特征提取器，不是一个分类器，如果读者想要对图像进行分类，应该在`DinoV2`骨干网络后增加一个分类头，而不是直接使用骨干网络进行分类
+这篇博客的[之前某一个版本（2025.4.25 23:38，Commit:7f984a3）](https://github.com/Katyusha0x26d/blog/commit/7f984a3521e7b4759b62b87ef59bb485bc2c9ec2)里我直接使用`DinoV2`进行`ImageNet`预测，这实际上是不对的，因为`DinoV2`只是一个特征提取器，不是一个分类器，如果读者想要对图像进行分类，应该在`DinoV2`骨干网络后增加一个分类头，而不是直接使用骨干网络进行分类
 
 在读者目前看到的文章版本里，这个错误已经被修复
 
@@ -381,7 +381,7 @@ run_calibration.py dinov2_vits14.mlir \
 -o dinov2_vits14_calib_table
 ```
 
-将MLIR量化成INT8非对称cvimodel：
+将MLIR量化成INT8非对称cvimodel，并添加`--fuse_preprocess`选项将预处理阶段集成在模型内部：
 
 ```shell
 model_deploy.py \
@@ -389,8 +389,15 @@ model_deploy.py \
 --asymmetric \
 --calibration_table dinov2_vits14_calib_table \
 --chip cv181x \
+--fuse_preprocess \
 --quantize INT8 \
 --model dinov2_vits14.cvimodel
+```
+
+完成转换后，使用`model_tool`查看cvimodel信息
+
+```shell
+model_tool
 ```
 
 ### 编写cvimodel推理程序
@@ -484,68 +491,60 @@ target_link_libraries(guidance
 #include <cviruntime.h>
 #include <opencv2/opencv.hpp>
 
-#define IMG_RESIZE_DIMS 448,448
-#define RGB_MEAN        123.675,116.28,103.53
-#define INPUT_SCALE     0.0171,0.0175,0.0174
-
-void usage() {
-    printf("Usage: dinov2 <model> <image>\n");
+void usage(char *program_name) {
+    printf("Usage: %s <model> <image>\n", program_name);
 }
 
 int main(int argc, char **argv) {
     if (argc < 3) {
-        usage();
-        return 1;
+        usage(argv[0]);
+        return EXIT_FAILURE;
     }
     const char *model_path = argv[1];
     const char *image_path = argv[2];
-    const char *labels_path = argv[3];
     // load model
     CVI_MODEL_HANDLE model = nullptr;
     int rc = CVI_NN_RegisterModel(model_path, &model);
     if (rc != CVI_RC_SUCCESS) {
         printf("CVI_NN_RegisterModel failed, err %d\n", rc);
-        return 1;
+        return EXIT_FAILURE;
     }
     CVI_TENSOR *input_tensors, *output_tensors;
     int32_t input_num, output_num;
     CVI_NN_GetInputOutputTensors(model, &input_tensors, &input_num, &output_tensors, &output_num);
     CVI_TENSOR *input = CVI_NN_GetTensorByName(CVI_NN_DEFAULT_TENSOR, input_tensors, input_num);
     CVI_TENSOR *output = CVI_NN_GetTensorByName(CVI_NN_DEFAULT_TENSOR, output_tensors, output_num);
-    float qscale = CVI_NN_TensorQuantScale(input);
-    printf("qscale: %f\n", qscale);
-    CVI_SHAPE shape = CVI_NN_TensorShape(input);
-    int32_t height = shape.dim[2];
-    int32_t width = shape.dim[3];
+    float input_qscale = CVI_NN_TensorQuantScale(input);
+    printf("input qscale: %f\n", input_qscale);
+    CVI_SHAPE input_shape = CVI_NN_TensorShape(input);
+    int32_t input_height = input_shape.dim[2];
+    int32_t input_width = input_shape.dim[3];
     // Load input image
     cv::Mat bgr_image = cv::imread(image_path);
     if (!bgr_image.data) {
         printf("Could not open image\n");
-        return 1;
+        return EXIT_FAILURE;
     }
-    cv::resize(bgr_image, bgr_image, cv::Size(IMG_RESIZE_DIMS));
     cv::Mat image;
-    cv::cvtColor(bgr_image, image, cv::COLOR_BGR2RGB);
-    cv::Size size = cv::Size(height, width);
+    cv::resize(bgr_image, image, cv::Size(input_width, input_height));
+    cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
+    cv::Size size = cv::Size(input_width, input_height);
     cv::Mat channels[3];
     for (int i = 0; i < 3; i++) {
-        // CV_8SC1: 8 bit signed  single channel matrix
-        channels[i]  = cv::Mat(height, width, CV_8SC1);
+        channels[i]  = cv::Mat(input_width, input_height, CV_8SC1);
     }
     cv::split(image, channels);
-    float mean[]  = {RGB_MEAN};
-    float input_scale[] = {INPUT_SCALE};
     for (int i = 0; i < 3; i++) {
-        channels[i].convertTo(channels[i], CV_8SC1, input_scale[i] * qscale, -1 * mean[i] * input_scale[i] * qscale);
+        channels[i].convertTo(channels[i], CV_8SC1, input_qscale, 0);
     }
     // input image to model
-    int8_t *ptr = (int8_t *)CVI_NN_TensorPtr(input);
-    int channel_size = height * width;
+    int8_t *input_ptr = (int8_t *)CVI_NN_TensorPtr(input);
+    int channel_size = input_height * input_width;
     for (int i = 0; i < 3; i++) {
-        memcpy(ptr + i * channel_size, channels[i].data, channel_size);
+        memcpy(input_ptr + i * channel_size, channels[i].data, channel_size);
     }
     // run inference
-    CVI_NN_Forward(model,  input_tensors, input_num, output_tensors, output_num);
+    CVI_NN_Forward(model, input_tensors, input_num, output_tensors, output_num);
     printf("CVI_NN_Forward succeeded.\n");
     // Output results
     float *features = (float *)CVI_NN_TensorPtr(output);
@@ -590,4 +589,4 @@ chmod +x guidance
 ./guidance dinov2_vits14.cvimodel ILSVRC2012_val_00000094.JPEG
 ```
 
-![测试结果](https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/BpElNK5oqv45ckdDpKtV3jNbBOXi5fAu/Snipaste_2025-04-26_18-33-46.png "测试结果")
+![测试结果](https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/vWYKcwiJrS8na1uYMrdCyXNpMRcfXQk1/Snipaste_2025-05-23_17-25-09.png "测试结果")
