@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Katyusha Mindpalace</title>
+        <link>https://katyusha.me/</link>
+        <description>谨以此纪录我平凡的一生</description>
+        <lastBuildDate>Fri, 30 May 2025 06:06:46 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <image>
+            <title>Katyusha Mindpalace</title>
+            <url>https://katyusha.me/katyusha.jpg</url>
+            <link>https://katyusha.me/</link>
+        </image>
+        <copyright>CC BY-NC-SA 4.0 2025 © Katyusha0x26d</copyright>
+        <atom:link href="https://katyusha.me/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[算能边缘计算设备开发环境的搭建指北]]></title>
+            <link>https://katyusha.me/posts/sophgo-runtime-setup</link>
+            <guid>https://katyusha.me/posts/sophgo-runtime-setup</guid>
+            <pubDate>Wed, 30 Apr 2025 12:00:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p><a href="https://www.sophgo.com/about-us/index.html">算能（Sophgo）</a>是国内开发边缘计算处理器比较著名的公司</p>
+<p>参加的一次竞赛，在使用其<code>cv181x</code>处理器部署深度学习模型时，因为开发环境<a href="https://github.com/sophgo/cviruntime"><code>cviruntime</code></a>的官方文档不是很完整，所以在开发环境的搭建上折腾了一小段时间，随后便写下此文记录我个人的解决方案，以供查阅</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/sophgo-runtime-setup" target="_blank">https://katyusha.me/posts/sophgo-runtime-setup</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[Valaxy测试页]]></title>
+            <link>https://katyusha.me/posts/hello-valaxy</link>
+            <guid>https://katyusha.me/posts/hello-valaxy</guid>
+            <pubDate>Tue, 22 Apr 2025 08:06:15 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<h5>五级标题</h5>
+<h6>六级标题</h6>
+<h2>Markdown基本及附加功能测试</h2>
+<p>这是一段基本Markdown格式的文字，包含</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/hello-valaxy" target="_blank">https://katyusha.me/posts/hello-valaxy</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+    </channel>
+</rss>
