@@ -30,6 +30,7 @@ declare module 'vue-router/auto-routes' {
     '/posts/': RouteRecordInfo<'/posts/', '/posts', Record<never, never>, Record<never, never>>,
     '/posts/hello-valaxy': RouteRecordInfo<'/posts/hello-valaxy', '/posts/hello-valaxy', Record<never, never>, Record<never, never>>,
     '/posts/sophgo-runtime-setup': RouteRecordInfo<'/posts/sophgo-runtime-setup', '/posts/sophgo-runtime-setup', Record<never, never>, Record<never, never>>,
+    '/posts/web-authentication-ideas': RouteRecordInfo<'/posts/web-authentication-ideas', '/posts/web-authentication-ideas', Record<never, never>, Record<never, never>>,
     '/projects/': RouteRecordInfo<'/projects/', '/projects', Record<never, never>, Record<never, never>>,
     '/tags/': RouteRecordInfo<'/tags/', '/tags', Record<never, never>, Record<never, never>>,
   }
