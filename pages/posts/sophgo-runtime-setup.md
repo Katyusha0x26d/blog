@@ -11,7 +11,7 @@ updated: 2025-04-30 20:00:00 +0800
 
 [算能（Sophgo）](https://www.sophgo.com/about-us/index.html)是国内开发边缘计算处理器比较著名的公司
 
-参加的一次竞赛，在使用其`cv181x`处理器部署深度学习模型时，因为开发环境[`cviruntime`](https://github.com/sophgo/cviruntime)的官方文档不是很完整，所以在开发环境的搭建上折腾了一小段时间，随后便写下此文记录我个人的解决方案，以供查阅
+参加的一次竞赛，在使用其`cv181x`处理器部署深度学习模型时，因为开发环境[`cviruntime`](https://github.com/sophgo/cviruntime)的官方文档不是很完整，所以在开发环境的搭建上折腾了一小段时间，随后便写下此文记录我个人的解决方案，以供新手查阅
 
 <!-- more -->
 
@@ -583,7 +583,7 @@ scp -O guidance imagenet/ILSVRC2012_val_00000178.JPEG dinov2_vits14.cvimodel roo
 chmod +x guidance
 ```
 
-执行程序获得结果，注意此处结果只是一个384长度的向量，因为我们使用的模型是一个特征提取器而不是分类器，分类器经过 $softmax$ 后才会得到`num_classes` 个类的具体概率
+执行程序获得结果，注意此处结果只是一个384长度的向量，因为我们使用的模型是一个特征提取器而不是分类器，对于常见的分类模型，分类器会将特征提取器的输出经过一个全连接层，随后经过 $softmax$ 后才会得到`num_classes` 个类的具体概率
 
 ```shell
 ./guidance dinov2_vits14.cvimodel ILSVRC2012_val_00000094.JPEG
