@@ -18,6 +18,17 @@ projects:
         color: '#f1e05a'
         url: https://counter.katyusha.me/count/svg/VisitCounter/for-the-badge_dark.svg
         github: Katyusha0x26d/VisitCounter
+
+  research:
+    title: 科研
+    emoji: ⚗️
+    collection:
+      - name: Steganography
+        emoji: 🔬
+        desc: 隐写技术的一些idea
+        color: '#f6a0a5'
+        url: https://github.com/Katyusha0x26d/Steganography
+        github: Katyusha0x26d/Steganography
       
   other:
     title: 文档
