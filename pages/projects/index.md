@@ -14,10 +14,10 @@ projects:
     collection:
       - name: VisitCounter
         emoji: ⌛
-        desc: Markdown页面访问计数器
+        desc: 功能强大的Markdown页面访问计数器
         color: '#f1e05a'
         url: https://counter.katyusha.me/count/svg/VisitCounter/for-the-badge_dark.svg
-        github: YunYouJun/git-geass
+        github: Katyusha0x26d/VisitCounter
       
   other:
     title: 文档
