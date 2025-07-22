@@ -1,6 +1,3 @@
-permissions:
-  contents: read
-  pages: write
 name: GitHub Pages
 
 on:
