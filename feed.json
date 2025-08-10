@@ -1,0 +1,62 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Katyusha Mindpalace",
+    "home_page_url": "https://katyusha.me/",
+    "feed_url": "https://katyusha.me/feed.json",
+    "description": "谨以此纪录我平凡的一生",
+    "icon": "https://katyusha.me/katyusha.jpg",
+    "author": {
+        "name": "Katyusha0x26d",
+        "url": "https://valaxy.site"
+    },
+    "items": [
+        {
+            "id": "",
+            "content_html": "<p>众所周知，给Markdown页面做访问计数，要么像卜蒜子API这样，直接在显示Markdown的网页上做功夫，要么就是在Markdown中嵌入一张图片，在提供图片的后端进行计数，在图片上显示计数</p>\n<p><img src=\"https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/e5KI7oHaP9A8r41x3FK9XXQQECv5P8LU/Snipaste_2025-07-22_16-56-42.png\" alt=\"效果展示\" title=\"效果展示\"></p>\n<p>我的GitHub主页就是这样的计数方式，然而<a href=\"https://blog.glitch.com/post/changes-are-coming-to-glitch/\">glitch最近关停了一些托管的应用</a>，该计数器就是托管于glitch，并且我也没找到官方仓库，所以便自己用Springboot做了一个类似的东西</p>\n<br/><p>访问 <a href=\"https://katyusha.me/posts/diy-markdown-visit-counter\" target=\"_blank\">https://katyusha.me/posts/diy-markdown-visit-counter</a> 阅读全文。</p>",
+            "url": "https://katyusha.me/posts/diy-markdown-visit-counter",
+            "title": "DIY一个Markdown页面访问计数器",
+            "date_modified": "2025-07-22T09:07:12.000Z",
+            "date_published": "2025-07-22T09:07:12.000Z",
+            "author": {
+                "name": "Katyusha0x26d",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "",
+            "content_html": "<p>最近在编写一个Spring Boot后端项目，需要处理用户身份认证，遂撰写此文总结一下基本的Web后端服务身份认证方案。</p>\n<br/><p>访问 <a href=\"https://katyusha.me/posts/web-authentication-methods\" target=\"_blank\">https://katyusha.me/posts/web-authentication-methods</a> 阅读全文。</p>",
+            "url": "https://katyusha.me/posts/web-authentication-methods",
+            "title": "Web后端服务身份认证方案汇总与个人思考",
+            "date_modified": "2025-07-12T17:14:40.000Z",
+            "date_published": "2025-07-12T17:14:40.000Z",
+            "author": {
+                "name": "Katyusha0x26d",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "",
+            "content_html": "<p><a href=\"https://www.sophgo.com/about-us/index.html\">算能（Sophgo）</a>是国内开发边缘计算处理器比较著名的公司</p>\n<p>参加的一次竞赛，在使用其<code>cv181x</code>处理器部署深度学习模型时，因为开发环境<a href=\"https://github.com/sophgo/cviruntime\"><code>cviruntime</code></a>的官方文档不是很完整，所以在开发环境的搭建上折腾了一小段时间，随后便写下此文记录我个人的解决方案，以供新手查阅</p>\n<br/><p>访问 <a href=\"https://katyusha.me/posts/sophgo-runtime-setup\" target=\"_blank\">https://katyusha.me/posts/sophgo-runtime-setup</a> 阅读全文。</p>",
+            "url": "https://katyusha.me/posts/sophgo-runtime-setup",
+            "title": "算能边缘计算设备开发环境的搭建指北",
+            "date_modified": "2025-04-25T15:38:15.000Z",
+            "date_published": "2025-04-30T12:00:00.000Z",
+            "author": {
+                "name": "Katyusha0x26d",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "",
+            "content_html": "<h2>二级标题</h2>\n<h3>三级标题</h3>\n<h4>四级标题</h4>\n<h5>五级标题</h5>\n<h6>六级标题</h6>\n<h2>Markdown基本及附加功能测试</h2>\n<p>这是一段基本Markdown格式的文字，包含</p>\n<br/><p>访问 <a href=\"https://katyusha.me/posts/hello-valaxy\" target=\"_blank\">https://katyusha.me/posts/hello-valaxy</a> 阅读全文。</p>",
+            "url": "https://katyusha.me/posts/hello-valaxy",
+            "title": "Valaxy测试页",
+            "date_modified": "2025-04-22T08:06:15.000Z",
+            "date_published": "2025-04-22T08:06:15.000Z",
+            "author": {
+                "name": "Katyusha0x26d",
+                "url": "https://valaxy.site"
+            }
+        }
+    ]
+}
