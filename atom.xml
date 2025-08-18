@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://katyusha.me/</id>
+    <title>Katyusha Mindpalace</title>
+    <updated>2025-08-18T10:07:40.640Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>Katyusha0x26d</name>
+        <email>i@valaxy.site</email>
+        <uri>https://valaxy.site</uri>
+    </author>
+    <link rel="alternate" href="https://katyusha.me/"/>
+    <link rel="self" href="https://katyusha.me/atom.xml"/>
+    <subtitle>谨以此纪录我平凡的一生</subtitle>
+    <logo>https://katyusha.me/katyusha.jpg</logo>
+    <icon>https://katyusha.me/favicon.svg</icon>
+    <rights>CC BY-NC-SA 4.0 2025 © Katyusha0x26d</rights>
+    <entry>
+        <title type="html"><![CDATA[OAuth2.0协议原理与Spring Security完整实现]]></title>
+        <id>https://katyusha.me/posts/oauth2-authentication-implementation</id>
+        <link href="https://katyusha.me/posts/oauth2-authentication-implementation"/>
+        <updated>2025-07-31T09:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p>最近在开发一个需要第三方登录的Spring Boot项目，需要实现类似“使用GitHub登录”、“使用微信登录”的功能。OAuth2.0作为目前最流行的授权框架，完美解决了第三方授权的问题。本文将从协议规范到代码实现，详细剖析OAuth2.0的工作原理。</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/oauth2-authentication-implementation" target="_blank">https://katyusha.me/posts/oauth2-authentication-implementation</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-07-31T09:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[DIY一个Markdown页面访问计数器]]></title>
+        <id>https://katyusha.me/posts/diy-markdown-visit-counter</id>
+        <link href="https://katyusha.me/posts/diy-markdown-visit-counter"/>
+        <updated>2025-07-22T09:07:12.000Z</updated>
+        <content type="html"><![CDATA[<p>众所周知，给Markdown页面做访问计数，要么像卜蒜子API这样，直接在显示Markdown的网页上做功夫，要么就是在Markdown中嵌入一张图片，在提供图片的后端进行计数，在图片上显示计数</p>
+<p><img src="https://lc-gluttony.s3.amazonaws.com/6Beck3SuJkGW/e5KI7oHaP9A8r41x3FK9XXQQECv5P8LU/Snipaste_2025-07-22_16-56-42.png" alt="效果展示" title="效果展示"></p>
+<p>我的GitHub主页就是这样的计数方式，然而<a href="https://blog.glitch.com/post/changes-are-coming-to-glitch/">glitch最近关停了一些托管的应用</a>，该计数器就是托管于glitch，并且我也没找到官方仓库，所以便自己用Springboot做了一个类似的东西</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/diy-markdown-visit-counter" target="_blank">https://katyusha.me/posts/diy-markdown-visit-counter</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-07-22T09:07:12.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CSRF攻击原理与防御策略深度剖析]]></title>
+        <id>https://katyusha.me/posts/csrf-attack-defense</id>
+        <link href="https://katyusha.me/posts/csrf-attack-defense"/>
+        <updated>2025-06-03T06:30:00.000Z</updated>
+        <content type="html"><![CDATA[<p>CSRF（Cross-Site Request Forgery，跨站请求伪造）是Web应用中一种常见的安全漏洞，攻击者通过伪造用户请求来执行未经授权的操作。本文将详细剖析CSRF攻击的原理、案例，并提供多种防御策略的实现方案。</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/csrf-attack-defense" target="_blank">https://katyusha.me/posts/csrf-attack-defense</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-06-03T06:30:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Web后端服务授权控制方案汇总与个人思考]]></title>
+        <id>https://katyusha.me/posts/web-authorization-methods</id>
+        <link href="https://katyusha.me/posts/web-authorization-methods"/>
+        <updated>2025-05-14T14:46:30.000Z</updated>
+        <content type="html"><![CDATA[<p>在完成用户身份认证后，如何控制用户能访问哪些资源、执行哪些操作？这就是授权（Authorization）要解决的问题。本文将详细介绍RBAC、ABAC和Spring Security的SpEL权限验证等主流授权方案的原理与实现。</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/web-authorization-methods" target="_blank">https://katyusha.me/posts/web-authorization-methods</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-05-15T08:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[算能边缘计算设备开发环境的搭建指北]]></title>
+        <id>https://katyusha.me/posts/sophgo-runtime-setup</id>
+        <link href="https://katyusha.me/posts/sophgo-runtime-setup"/>
+        <updated>2025-04-25T15:38:15.000Z</updated>
+        <content type="html"><![CDATA[<p><a href="https://www.sophgo.com/about-us/index.html">算能（Sophgo）</a>是国内开发边缘计算处理器比较著名的公司</p>
+<p>参加的一次竞赛，在使用其<code>cv181x</code>处理器部署深度学习模型时，因为开发环境<a href="https://github.com/sophgo/cviruntime"><code>cviruntime</code></a>的官方文档不是很完整，所以在开发环境的搭建上折腾了一小段时间，随后便写下此文记录我个人的解决方案，以供新手查阅</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/sophgo-runtime-setup" target="_blank">https://katyusha.me/posts/sophgo-runtime-setup</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-04-30T12:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Web后端服务身份认证方案汇总与个人思考]]></title>
+        <id>https://katyusha.me/posts/web-authentication-methods</id>
+        <link href="https://katyusha.me/posts/web-authentication-methods"/>
+        <updated>2025-04-20T17:14:40.000Z</updated>
+        <content type="html"><![CDATA[<p>最近在编写一个Spring Boot后端项目，需要处理用户身份认证，遂撰写此文总结一下基本的Web后端服务身份认证方案。</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/web-authentication-methods" target="_blank">https://katyusha.me/posts/web-authentication-methods</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-04-20T17:14:40.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Spring AOP面向切面编程原理与实战详解]]></title>
+        <id>https://katyusha.me/posts/spring-aop-deep-dive</id>
+        <link href="https://katyusha.me/posts/spring-aop-deep-dive"/>
+        <updated>2025-04-18T07:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p>最近在重构一个Spring Boot项目时，需要对所有接口添加统一的日志记录和性能监控，使用传统方式需要修改每个方法，工作量巨大且代码冗余。Spring AOP（面向切面编程）完美解决了这个问题，本文将深入剖析Spring AOP的使用方式和底层原理。</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/spring-aop-deep-dive" target="_blank">https://katyusha.me/posts/spring-aop-deep-dive</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-04-18T07:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Valaxy测试页]]></title>
+        <id>https://katyusha.me/posts/hello-valaxy</id>
+        <link href="https://katyusha.me/posts/hello-valaxy"/>
+        <updated>2025-04-01T08:06:15.000Z</updated>
+        <content type="html"><![CDATA[<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<h5>五级标题</h5>
+<h6>六级标题</h6>
+<h2>Markdown基本及附加功能测试</h2>
+<p>这是一段基本Markdown格式的文字，包含</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/hello-valaxy" target="_blank">https://katyusha.me/posts/hello-valaxy</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Katyusha0x26d</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-04-01T08:06:15.000Z</published>
+    </entry>
+</feed>
