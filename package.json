@@ -13,7 +13,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "valaxy": "0.26.8",
+    "valaxy": "0.26.10",
     "valaxy-theme-yun": "0.26.10",
     "vue-gtag-next": "^1.14.0"
   },
