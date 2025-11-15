@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Katyusha Mindpalace</title>
+        <link>https://katyusha.me/</link>
+        <description>谨以此纪录我平凡的一生</description>
+        <lastBuildDate>Sat, 15 Nov 2025 14:52:58 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <image>
+            <title>Katyusha Mindpalace</title>
+            <url>https://katyusha.me/katyusha.jpg</url>
+            <link>https://katyusha.me/</link>
+        </image>
+        <copyright>CC BY-NC-SA 4.0 2025 © Katyusha0x26d</copyright>
+        <atom:link href="https://katyusha.me/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[从SDS到ZipList理解Redis常用数据结构]]></title>
+            <link>https://katyusha.me/posts/redis-data-structures</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/redis-data-structures</guid>
+            <pubDate>Mon, 13 Oct 2025 01:15:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>很多人觉得Redis快，是因为它基于内存。这当然没错，但如果只是把数据放在内存里，任何数据库都能做到。Redis真正的精妙之处，首先在于它为不同场景精心设计的底层数据结构</p>
+<p>前段时间在排查一个线上问题：某个大key导致Redis响应变慢。当时我深入阅读了Redis的源码，发现它的String类型在不同情况下会使用完全不同的内部表示——短字符串用embstr、长字符串用raw、纯数字用int。这种针对性优化的思想贯穿在Redis的每个数据结构中</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/redis-data-structures" target="_blank">https://katyusha.me/posts/redis-data-structures</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[Dive Into -- Redis中的HyperLogLog]]></title>
+            <link>https://katyusha.me/posts/redis-hyperloglog</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/redis-hyperloglog</guid>
+            <pubDate>Sun, 12 Oct 2025 06:30:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>在互联网应用中，统计独立访客数量（UV统计）是一个很常见的需求。如果你正在维护一个流量不错的网站，可能会发现传统的Set集合统计方法会消耗大量内存——每个用户ID都需要存储完整的字符串。这时候，HyperLogLog就派上用场了</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/redis-hyperloglog" target="_blank">https://katyusha.me/posts/redis-hyperloglog</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[使用静态编译构建Java微服务]]></title>
+            <link>https://katyusha.me/posts/java-jit-and-aot</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/java-jit-and-aot</guid>
+            <pubDate>Fri, 12 Sep 2025 10:30:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>当我们谈论Java性能时，绕不开两个关键技术：JIT（Just-In-Time）和AOT（Ahead-Of-Time）编译。前者让Java运行时越来越快，后者让Java应用秒级启动成为可能</p>
+<p>在云原生时代，传统Java应用的启动慢、内存占用高的问题愈发突出。GraalVM的AOT编译技术为微服务场景带来了新的可能性。这篇文章将从编译原理出发，深入剖析JIT和AOT的技术细节，并通过实战案例展示如何基于静态编译构建高性能微服务</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/java-jit-and-aot" target="_blank">https://katyusha.me/posts/java-jit-and-aot</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[利用RAG低成本构建一个专业AI助手]]></title>
+            <link>https://katyusha.me/posts/build-ai-assistant-using-rag</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/build-ai-assistant-using-rag</guid>
+            <pubDate>Fri, 05 Sep 2025 14:45:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>最近想做一个医学知识库（类似于默沙东诊疗手册，但是更加全面智能），患者可以通过询问自己的症状，得出初步的诊疗意见，问题是，这些知识都不在模型的训练数据里</p>
+<p>直接fine-tune？成本太高，而且每次更新知识都要重新训练。后来想到了RAG方案</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/build-ai-assistant-using-rag" target="_blank">https://katyusha.me/posts/build-ai-assistant-using-rag</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[深入理解JVM内存管理与垃圾回收]]></title>
+            <link>https://katyusha.me/posts/jvm-memory-gc-deep-dive</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/jvm-memory-gc-deep-dive</guid>
+            <pubDate>Mon, 18 Aug 2025 01:20:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>关于JVM的内存模型和GC机制这类底层原理和细节，如果不深入理解，永远不是一个合格的程序员</p>
+<p>Java八股中，对GC的理解停留在&quot;标记-清除&quot;、&quot;复制算法&quot;这些概念层面。但生产环境的问题往往更复杂：为什么年轻代用复制算法老年代用标记-整理？卡表（Card Table）到底解决了什么问题？G1的Region是如何管理的？</p>
+<p>这篇文章会从JVM规范到Hotspot源码，深入剖析内存管理的每个细节</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/jvm-memory-gc-deep-dive" target="_blank">https://katyusha.me/posts/jvm-memory-gc-deep-dive</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[JVM类加载机制剖析]]></title>
+            <link>https://katyusha.me/posts/jvm-class-loading-deep-dive</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/jvm-class-loading-deep-dive</guid>
+            <pubDate>Sat, 16 Aug 2025 08:30:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>理解类加载机制不仅是面试八股文，更是解决实际问题的关键。Spring的AOP、Tomcat的热部署、OSGI的模块化，底层都是在玩类加载器的花样</p>
+<p>这篇文章会从Class文件格式开始，深入到Hotspot的C++源码，完整剖析类加载的每一个细节</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/jvm-class-loading-deep-dive" target="_blank">https://katyusha.me/posts/jvm-class-loading-deep-dive</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[微服务与云原生：架构演进的思考]]></title>
+            <link>https://katyusha.me/posts/about-microservices-and-cloudnative</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/about-microservices-and-cloudnative</guid>
+            <pubDate>Sat, 12 Jul 2025 03:00:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>从单体应用到微服务，从物理机到容器云，软件架构正在经历一场深刻的变革。这不仅是技术栈的更新，更是思维方式的转变</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/about-microservices-and-cloudnative" target="_blank">https://katyusha.me/posts/about-microservices-and-cloudnative</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[Web后端服务授权控制方案汇总与个人思考]]></title>
+            <link>https://katyusha.me/posts/web-authorization-methods</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/web-authorization-methods</guid>
+            <pubDate>Thu, 15 May 2025 08:00:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>在完成用户身份认证后，如何控制用户能访问哪些资源、执行哪些操作？这就是授权（Authorization）要解决的问题。本文将详细介绍RBAC、ABAC和Spring Security的SpEL权限验证等主流授权方案的原理与实现。</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/web-authorization-methods" target="_blank">https://katyusha.me/posts/web-authorization-methods</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[算能边缘计算设备开发环境的搭建指北]]></title>
+            <link>https://katyusha.me/posts/sophgo-runtime-setup</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/sophgo-runtime-setup</guid>
+            <pubDate>Wed, 30 Apr 2025 12:00:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p><a href="https://www.sophgo.com/about-us/index.html">算能（Sophgo）</a>是国内开发边缘计算处理器比较著名的公司</p>
+<p>参加的一次竞赛，在使用其<code>cv181x</code>处理器部署深度学习模型时，因为开发环境<a href="https://github.com/sophgo/cviruntime"><code>cviruntime</code></a>的官方文档不是很完整，所以在开发环境的搭建上折腾了一小段时间，随后便写下此文记录我个人的解决方案，以供新手查阅</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/sophgo-runtime-setup" target="_blank">https://katyusha.me/posts/sophgo-runtime-setup</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[Web后端服务身份认证方案汇总与个人思考]]></title>
+            <link>https://katyusha.me/posts/web-authentication-methods</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/web-authentication-methods</guid>
+            <pubDate>Sun, 20 Apr 2025 17:14:40 GMT</pubDate>
+            <content:encoded><![CDATA[<p>最近在编写一个Spring Boot后端项目，需要处理用户身份认证，遂撰写此文总结一下基本的Web后端服务身份认证方案。</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/web-authentication-methods" target="_blank">https://katyusha.me/posts/web-authentication-methods</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+        <item>
+            <title><![CDATA[Valaxy测试页]]></title>
+            <link>https://katyusha.me/posts/hello-valaxy</link>
+            <guid isPermaLink="false">https://katyusha.me/posts/hello-valaxy</guid>
+            <pubDate>Tue, 01 Apr 2025 08:06:15 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<h5>五级标题</h5>
+<h6>六级标题</h6>
+<h2>Markdown基本及附加功能测试</h2>
+<p>这是一段基本Markdown格式的文字，包含</p>
+<br/><p>访问 <a href="https://katyusha.me/posts/hello-valaxy" target="_blank">https://katyusha.me/posts/hello-valaxy</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (Katyusha0x26d)</author>
+        </item>
+    </channel>
+</rss>

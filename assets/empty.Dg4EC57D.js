@@ -1,0 +1,1 @@
+import"./chunks/@vueuse/motion.CGoWS-TN.js";import{$ as o,a0 as t,a1 as r,a2 as c}from"./framework.BGZf6O3E.js";const n={};function a(s,_){const e=t("RouterView");return c(),r(e)}const f=o(n,[["render",a]]);export{f as default};
