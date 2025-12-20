@@ -18,4 +18,10 @@ projects:
         color: '#f1e05a'
         github: Katyusha0x26d/github-readme-stats
         url: https://github-readme-stats.katyusha.me/
+      - name: picgo-plugin-compress
+        emoji: 📷
+        desc: PicGo图片压缩插件
+        color: '#1ff88bff'
+        github: Katyusha/picgo-plugin-compress
+        url: https://github.com/Katyusha0x26d/picgo-plugin-compress
 ---
