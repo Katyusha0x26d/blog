@@ -6,7 +6,7 @@ export default defineSiteConfig({
   title: 'Katyusha Mindpalace',
   author: {
     name: 'Katyusha0x26d',
-    avatar: 'https://static.katyusha.me/2025/12/9aa05b012bc313fb4db13f65ea8468d9.webp',
+    avatar: 'https://static.katyusha.me/2025/12/461f55b8e797c1b6d6dff754f66f7646.webp',
     status: {
       emoji: '🧑‍💻',
       message: 'busy...'
