@@ -24,7 +24,7 @@ export default defineValaxyConfig<UserThemeConfig>({
       {
         name: '友情链接',
         url: '/links/',
-        icon: 'i-ri-genderless-line',
+        icon: 'i-ri-links-line',
         color: 'dodgerblue',
       },
       {
@@ -47,6 +47,19 @@ export default defineValaxyConfig<UserThemeConfig>({
     footer: {
       since: 2024
     },
+
+    nav: [
+      {
+        text: '友情链接',
+        link: '/links/',
+        icon: 'i-ri-links-line'
+      },
+      {
+        text: '项目橱窗',
+        link: '/projects/',
+        icon: 'i-ri-folder-check-line'
+      }
+    ]
   },
 
   unocss: { safelist },
