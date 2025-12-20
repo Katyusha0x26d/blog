@@ -10,7 +10,7 @@ export default defineSiteConfig({
     status: {
       emoji: '🧑‍💻',
       message: 'busy...'
-    }
+    },
   },
   subtitle: '微醺学习法',
   description: 'Katyusha0x26d\'s blog',
@@ -54,6 +54,8 @@ export default defineSiteConfig({
     enable: true,
     provider: 'fuse'
   },
+
+  codeHeightLimit: 50,
 
   sponsor: {
     enable: false
