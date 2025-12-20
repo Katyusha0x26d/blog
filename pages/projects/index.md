@@ -22,6 +22,6 @@ projects:
         emoji: 📷
         desc: PicGo图片压缩插件
         color: '#1ff88bff'
-        github: Katyusha/picgo-plugin-compress
+        github: Katyusha0x26d/picgo-plugin-compress
         url: https://github.com/Katyusha0x26d/picgo-plugin-compress
 ---
