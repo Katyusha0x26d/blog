@@ -9,7 +9,8 @@
     "build:ssg": "valaxy build --ssg",
     "dev": "valaxy",
     "rss": "valaxy rss",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "clean-statics": "tsx -r dotenv/config scripts/clean-statics.ts"
   },
   "dependencies": {
     "valaxy": "0.26.10",
@@ -17,6 +18,10 @@
     "vue-gtag": "^3.6.3"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.958.0",
+    "dotenv": "^17.2.3",
+    "glob": "^13.0.0",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
