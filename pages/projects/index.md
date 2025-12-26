@@ -24,4 +24,14 @@ projects:
         color: '#1ff88bff'
         github: Katyusha0x26d/picgo-plugin-compress
         url: https://github.com/Katyusha0x26d/picgo-plugin-compress
+  documents:
+    title: 文档
+    emoji: 📖
+    collection:
+      - name: kerneltravel-website
+        emoji: 📃
+        desc: Linux内核之旅镜像站
+        color: '#27f8eeff'
+        github: Katyusha0x26d/kerneltravel-website
+        url: https://kerneltravel.katyusha.me/
 ---
